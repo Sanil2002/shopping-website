@@ -180,19 +180,25 @@ const Cart = () => {
                       type="button"
                       className="mt-6  flex items-center   border border-gray-300 text-gray-800 text-xl outline-none bg-transparent rounded-md"
                     >
-                      <button className = "p-3 hover:bg-gray-200 " onClick={() => dispatch(updateItemQuantity({ id: item.id, quantity: item.quantity - 1 }))}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-2.5 fill-current min-w-4"
-                        viewBox="0 0 124 124"
-                      >
-                        <path
-                          d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
-                          data-original="#000000"
-                        ></path>
-                      </svg>
+                      <button className="p-3 hover:bg-gray-200 " onClick={() => {
+                        if (item.quantity === 1) {
+                          dispatch(removeItem(item.id));
+                        } else {
+                          dispatch(updateItemQuantity({ id: item.id, quantity: item.quantity - 1 }));
+                        }
+                      }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-2.5 fill-current min-w-4"
+                          viewBox="0 0 124 124"
+                        >
+                          <path
+                            d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                            data-original="#000000"
+                          ></path>
+                        </svg>
                       </button>
-  
+
                       <span className="mx-3 font-bold">{item.quantity}</span>
                       <button  className = "p-3 hover:bg-gray-200" onClick={() => dispatch(updateItemQuantity({ id: item.id, quantity: item.quantity + 1 }))}>
                       <svg

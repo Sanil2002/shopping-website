@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 
 type Comment = {
@@ -21,6 +22,13 @@ export const Comments = () => {
 
     const [name, setName] = useState('');
     const [commentText, setCommentText] = useState('');
+    const [email, setEmail] = useState(false)
+    const { user } = useAuth0();
+
+    useEffect(() => {
+        if(user?.email === "sanilm4637@gmail.com")
+          setEmail(true);
+      })
 
     // Save comments to local storage whenever they change
     useEffect(() => {
@@ -53,27 +61,41 @@ export const Comments = () => {
 
     return (
         <div className="p-14 flex-1 flex-col pb-[14%]">
-            <h2 className="text-lg font-bold mb-4">Comments</h2>
+            <h2 className="text-4xl font-extrabold mb-4 from-black via-yellow-500 to-black">Comments</h2>
             <div className="flex flex-col space-y-4">
                 {comments.length === 0 ? (
                     <p>No comments yet.</p>
                 ) : (
                     comments.map(comment => (
-                        <div key={comment.id} className="bg-white p-4 rounded-lg shadow-md">
-                            <h3 className="text-lg font-bold">{comment.name}</h3>
-                            <p className="text-gray-700 text-sm mb-2">Posted on {comment.date}</p>
-                            <p className="text-gray-700">{comment.text}</p>
-                            <button
+                        <div key={comment.id} className="bg-white p-4 rounded-lg shadow-lg">
+                            <h3 className="text-xl font-bold">{comment.name}</h3>
+                            <p className="text-gray-700 text-sm mb-2">Posted on <span className='text-black'>{comment.date}</span></p>
+                            <p className="text-black text-2xl font-extrabold">{comment.text}</p>
+                            {email && <button
                                 onClick={() => handleDelete(comment.id)}
-                                className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                                className="mt-6 text-xl font-semibold text-red-500  flex items-center gap-1 shrink-0 hover:text-red-900"
                             >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-4 fill-current inline min-w-6"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                                        data-original="#000000"
+                                    ></path>
+                                    <path
+                                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                                        data-original="#000000"
+                                    ></path>
+                                </svg>
                                 Delete
-                            </button>
+                            </button>}
                         </div>
                     ))
                 )}
                 <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow-md">
-                    <h3 className="text-lg font-bold mb-2">Add a comment</h3>
+                    <h3 className="text-4xl font-extrabold mb-2">Add a comment</h3>
                     <div className="mb-4">
                         <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
                             Name
