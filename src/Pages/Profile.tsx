@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import LogoutButton from "../Components/LogoutButtton";
 import ButtonComponent from "../Utilities/ButtonComponent";
 import { Commentbutton } from "../Components/Commentbutton";
+import { Loading } from "../Utilities/Loading";
 // import Update from "./Update";
 
 const Profile = () => {
@@ -36,7 +37,7 @@ const Profile = () => {
 
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div><Loading /></div>;
   }
 
   if (error) {

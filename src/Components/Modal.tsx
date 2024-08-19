@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addProducts, initDB } from '../Utilities/db';
+import { validateProductForm } from '../Utilities/ValidateProductForm';
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,9 +10,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose}) => {
-  const [id,setId] = useState("")
+  const [id,setId] = useState<string>('')
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState<string>('');
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
@@ -19,14 +20,26 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose}) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const numericPrice = price === '' ? 0 : Number(price);
+    const numericId = id === '' ? 0 : Number(id)
+
     const newProduct = {
-      id,
+      id: numericId,
       title,
-      price: parseFloat(price),
+      price: numericPrice,
       description,
       image,
       category,
     };
+
+    const isValid = validateProductForm(newProduct);
+     
+     
+    if(!isValid){
+      console.log("isvalid",isValid);
+      return;
+    }
 
     // try {
     //   await axios.post('https://fakestoreapi.com/products', newProduct);
@@ -133,4 +146,5 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose}) => {
 };
 
 export default Modal;
+
 
