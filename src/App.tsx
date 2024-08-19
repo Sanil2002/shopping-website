@@ -94,12 +94,12 @@ const dispatch = useDispatch();
           <Route path="/About" element={<About />} />
           <Route path="/checkout" element={<CheckoutSuccess/>} />
           <Route path="/Dashboard" element={<Dashboard/>} />
+          <Route path="/Store/:id" element={<Singleproduct />} />
         </Routes>
         <Cart />
       </Container>
       <Routes>
       <Route path="/Profile" element={<Profile />} />
-      <Route path="/Store/:id" element={<Singleproduct />} />
       <Route path="/Store" element={<Store />} />
       <Route path="/Update" element={<Update/>} />
       <Route path="/Comments" element={<Comments />} />

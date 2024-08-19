@@ -9,9 +9,8 @@ type Comment = {
 };
 
 export const Comments = () => {
-    const [comments, setComments] = useState<Comment[]>(() => {
-        // Initialize state directly from local storage
-        try {
+    const [comments, setComments] = useState<Comment[]>(() => {                                                                                                  
+        try {                                                                                       // Initialize state directly from local storage
             const savedComments = localStorage.getItem('comments');
             return savedComments ? JSON.parse(savedComments) : [];
         } catch (error) {

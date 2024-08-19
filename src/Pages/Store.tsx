@@ -82,7 +82,7 @@ const Store: React.FC = () => {
           </div>
           <div className=" md:w-1/3 xl:w-1/4">
             <select value={productCategory} onChange={handleFilteredChange} className="w-full bg-gray-100 border border-gray-300 rounded-lg py-2 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300">
-              <option value="all">Category</option>
+              <option value="all">All Category</option>
               <option value="men's clothing">Men</option>
               <option value="women's clothing">Women</option>
               <option value="electronics">Electronics</option>

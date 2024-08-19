@@ -144,12 +144,12 @@ const SingleProduct: React.FC = () => {
   const isUserAuthorized = user?.email === 'sanilm4637@gmail.com';
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-md min-h-screen">
+    <div className="p-6 bg-white shadow-lg rounded-md min-h-screen pt-32">
       <div className="flex">
         <img className="w-1/3 h-1/3 rounded-md " src={product.image} alt={product.title} />
         <div className="ml-6 w-1/2">
-          <h1 className="text-4xl font-extrabold mb-4">{product.title}</h1>
-          <p className="text-xl font-semibold text-gray-700 mb-2">${product.price}</p>
+          <h1 className="text-5xl font-extrabold mb-4">{product.title}</h1>
+          <p className="text-3xl font-semibold text-gray-700 mb-2">${product.price}</p>
           <p className="text-gray-600 mb-4">{product.description}</p>
           <div className="flex items-center mb-4">
             {product.rating ? (
