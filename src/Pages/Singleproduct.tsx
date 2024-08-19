@@ -22,7 +22,7 @@ interface ProductDetails {
 }
 
 const SingleProduct: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();                                  //Extracting productID from the URL parameters
   const [product, setProduct] = useState<ProductDetails | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useAuth0();
@@ -168,9 +168,9 @@ const SingleProduct: React.FC = () => {
             )}
           </div>
           <div className="mb-4">
-            <button onClick={handleRemoveToCart} className="px-4 py-2 bg-gray-300 rounded-l">-</button>
+            <button onClick={handleRemoveToCart} className="px-4 py-2 bg-gray-300 rounded-l hover:bg-gray-400">-</button>
             <span className="px-4 py-2 border-t border-b">{cartQuantity}</span>
-            <button onClick={handleAddToCart} className="px-4 py-2 bg-gray-300 rounded-r">+</button>
+            <button onClick={handleAddToCart} className="px-4 py-2 bg-gray-300 rounded-r hover:bg-gray-400">+</button>
           </div>
           <div className="flex flex-row gap-14">
             <button onClick={handleAddToCart} className="bg-yellow-500 text-white px-4 py-2  hover:bg-black hover:-translate-y-2 duration-300 rounded">Add to Cart</button>
@@ -242,7 +242,6 @@ const SingleProduct: React.FC = () => {
 };
 
 export default SingleProduct;
-
 
 
 

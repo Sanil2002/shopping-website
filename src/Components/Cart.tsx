@@ -1,90 +1,4 @@
-// import { useSelector, useDispatch } from 'react-redux';
-// import { RootState, AppDispatch } from '../app/store';
-// import { closeCart, removeItem, updateItemQuantity } from '../features/cartSlice';
-// import { useNavigate } from 'react-router-dom';
-
-
-// const Cart = () => {
-
-//   const dispatch: AppDispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const cartItems = useSelector((state: RootState) => state.cart.items);
-//   const isCartOpen = useSelector((state: RootState) => state.cart.isCartOpen);
-
-
-//   const handleCheckout = () => {
-//     navigate('/checkout');
-//   };
-
-
-//   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
-//   return (
-//     isCartOpen && (
-//     <div className="fixed right-0 top-0 h-full md:h-auto w-full md:w-auto lg:w-1/4 bg-yellow-50 text-black z-50 p-6 border-y-black overflow-y-auto shadow-lg max-h-[90vh] max-w-[60vh]">
-//       <button
-//         onClick={() => dispatch(closeCart())}
-//         className="absolute top-4 right-4 text-3xl text-red-600 hover:text-red-800"
-//       >
-//         &times;
-//       </button>
-//       <h2 className="text-3xl font-bold mb-6 text-center justify-center mt-10">Cart ({cartItems.length})</h2>
-//       <div>
-//         {cartItems.length === 0 ? (
-//           <p className="text-5xl font-serif text-black text-center">Your cart is empty.</p>
-//         ) : (
-//           <ul className="space-y-6">
-//             {cartItems.map(item => (
-//               <li key={item.id} className="flex items-center space-x-6 p-4 border-b border-gray-300">
-//                 <img src={item.image} alt={item.name} className="w-32 h-32 rounded shadow-sm" />
-//                 <div className="flex-1">
-//                   <span className="block font-semibold text-lg">{item.name}</span>
-//                   <span className="block text-2xl text-gray-700 font-bold">${item.price.toFixed(2)}</span>
-//                   <div className="flex items-center mt-4 space-x-4">
-//                     <button
-//                       onClick={() => dispatch(updateItemQuantity({ id: item.id, quantity: item.quantity - 1 }))}
-//                       className="bg-yellow-300 hover:bg-yellow-300 text-black px-4 font-bold py-2 rounded shadow"
-//                     >
-//                       -
-//                     </button>
-//                     <span className="mx-2 text-2xl font-bold">{item.quantity}</span>
-//                     <button
-//                       onClick={() => dispatch(updateItemQuantity({ id: item.id, quantity: item.quantity + 1 }))}
-//                       className="bg-yellow-300 hover:bg-yellow-300 text-black px-4 py-2 font-bold rounded shadow"
-//                     >
-//                       +
-//                     </button>
-//                     <button
-//                       onClick={() => dispatch(removeItem(item.id))}
-//                       className="bg-red-500 hover:bg-red-600 text-black border-yellow-300 font-medium px-4 py-2 rounded shadow ml-4"
-//                     >
-//                       Remove
-//                     </button>
-//                   </div>
-//                 </div>
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//       {cartItems.length > 0 && (
-//         <div className="mt-6 text-center">
-//           <h3 className="text-2xl font-bold">Total Price: ${totalPrice.toFixed(2)}</h3>
-//           <button
-//             onClick={handleCheckout}
-//             className="mt-6 bg-green-500 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105"
-//           >
-//             Checkout
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   ));
-// };
-
-// export default Cart;
-
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';                                        // Import hooks from react-redux to interact with the Redux store.
 import { RootState, AppDispatch } from '../app/store';
 import { closeCart, removeItem, updateItemQuantity } from '../features/cartSlice';
 import { useNavigate } from 'react-router-dom';
@@ -92,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();                                    // Use the useDispatch hook to get the dispatch function with the correct type.
   const navigate = useNavigate();
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useSelector((state: RootState) => state.cart.items);          // Use the useSelector hook to access the cart items from the Redux store.
   const isCartOpen = useSelector((state: RootState) => state.cart.isCartOpen);
 
   console.log("sdz",cartItems)
@@ -130,7 +44,7 @@ const Cart = () => {
             </div>
   
             <div className="space-y-4 mt-12">
-              {cartItems.map((item) => (
+              {cartItems.map((item) => (                                                                                          // Iterate over cart items and render each item.
                 <div className="grid grid-cols-3 items-start gap-4 border border-yellow-300 rounded-3xl p-3">
                   <div className="col-span-2 flex items-start gap-4">
                     <div className="w-60 h-40 max-sm:w-24 max-sm:h-24 shrink-0  p-2 rounded-md">
@@ -232,7 +146,6 @@ const Cart = () => {
 };
 
 export default Cart;
-
 
 
 

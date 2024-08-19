@@ -10,29 +10,30 @@ interface CartItem {
 }
 
 export interface CartState {
-  items: CartItem[];
-  isCartOpen: boolean; // Add this state
+  items: CartItem[];                                                                                                          //Array of items currently in the cart
+  isCartOpen: boolean; 
 }
 
 const initialState: CartState = {
-  items: [],
-  isCartOpen: false // Initial state for cart visibility
+  items: [],                                                                                                                  //No items in the cart currently.
+  isCartOpen: false                                                                                                           // Initial state for cart visibility.
   ,
 };
 
-const cartSlice = createSlice({
+const cartSlice = createSlice({                                                                                               //creating a slice of the redux state for the cart.
   name: 'cart',
   initialState,
-  reducers: {
+  reducers: {                                                                                                                 //Reducer functions to handle actions.
+     //Set the cart items to a new list, replacing the current items.
     setCartItems: (state, action: PayloadAction<CartItem[]>) => {
-      state.items = action.payload;
+      state.items = action.payload;                                                                                           // Replace current items with the new list provided in the action payload.
       },
     addItem: (state, action: PayloadAction<CartItem>) => {
       const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
       if (itemIndex >= 0) {
         state.items[itemIndex].quantity += action.payload.quantity;
       } else {
-        state.items.push(action.payload);
+        state.items.push(action.payload);                                                                                     //If item is not in the cart add the new item to the cart.
         
       }
     },
@@ -55,7 +56,7 @@ const cartSlice = createSlice({
 });
 
 export const { addItem, removeItem, updateItemQuantity, openCart, closeCart,setCartItems } = cartSlice.actions;
-export const selectCartItems = (state: RootState) => state.cart.items;
-export const selectCartItemQuantity = (state: RootState, id: number) =>
-  state.cart.items.find(item => item.id === id)?.quantity || 0;
+export const selectCartItems = (state: RootState) => state.cart.items;                                                       //Selector to get the items from the cart state.
+export const selectCartItemQuantity = (state: RootState, id: number) =>                                                      // Selector to get the quantity of a specific item from the cart state.
+  state.cart.items.find(item => item.id === id)?.quantity || 0;                                                              // Find the item with the given ID and return its quantity, defaulting to 0 if not found.
 export default cartSlice.reducer;

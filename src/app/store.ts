@@ -12,12 +12,11 @@ import cartReducer from '../features/cartSlice';
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer,
+    cart: cartReducer,             
   },
 });
 
 // export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
+export type RootState = ReturnType<typeof store.getState>;         //Type for the state of the store
+export type AppDispatch = typeof store.dispatch;                   //Type for the dispatch function of the store
