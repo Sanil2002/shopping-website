@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addProducts, initDB } from "../Utilities/db";
+import { validateForm } from "../Utilities/ValidateForm";
 
 interface ProductDetails {
   id: number;
@@ -51,6 +52,10 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ product, onClose}) => {
       category,
       image: selectedFile ? preview : product.image,
     };
+
+    const isValid = validateForm(updatedProduct);
+    if (!isValid) return;
+
 
     // axios.patch(`https://fakestoreapi.com/products/${product.id}`, updatedProduct)
     //   .then(res => {

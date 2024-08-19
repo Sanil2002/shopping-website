@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addProducts, initDB } from '../Utilities/db';
-import { validateProductForm } from '../Utilities/ValidateProductForm';
+import { validateForm } from '../Utilities/ValidateForm';
 
 interface ModalProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose}) => {
       category,
     };
 
-    const isValid = validateProductForm(newProduct);
+    const isValid = validateForm(newProduct);
      
      
     if(!isValid){

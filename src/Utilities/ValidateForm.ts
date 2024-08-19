@@ -1,14 +1,13 @@
-export const validateProductForm = (product: {
+export const validateForm = (product: {
     id:number;
     title: string;
     price: number;
     description: string;
-    image: string;
+    image: string | File | null;
     category: string;
 }) => {
     const trimmedTitle = product.title.trim();
     const trimmedDescription = product.description.trim();
-    const trimmedImage = product.image.trim();
     const trimmedCategory = product.category.trim();
 
     if (!trimmedTitle) {
@@ -21,8 +20,25 @@ export const validateProductForm = (product: {
         return false;
     }
 
-    if (!trimmedImage) {
-        alert("Image URL cannot be empty or just spaces.");
+    if (typeof product.image === 'string') {                      //if image is in the form of URL
+        const trimmedImage = product.image.trim();
+        if(!trimmedImage){
+            alert("Image URL cannot be empty or just spaces.");
+            return false;
+        }
+    } else if(product.image instanceof File) {                   //if image is in the form of File.
+        if(!product.image){
+            alert("Please select an image file.");
+            return false;
+        }
+        const validTypes = ['image/jpeg','image/png','image/gif'];
+        if(!validTypes.includes(product.image.type)){
+            alert("Please select a valid image file (jpeg,png,gif).");
+            return false;
+        }
+
+    } else {
+        alert("Invalid image format.");
         return false;
     }
 
