@@ -26,12 +26,14 @@ interface CartButtonProps {
 
 
 const CartButton: React.FC<CartButtonProps> = ({ variant, className, onClick, quantity }) => {
+  const { isAuthenticated } = useAuth0();
 
 
   return (
     <Button variant={variant}
       className={`${className} relative flex items-center justify-center`}
-      onClick={onClick}>
+      onClick={onClick}
+      disabled={!isAuthenticated}>
       <FontAwesomeIcon icon={faShoppingCart} size="lg" />
       <span className="absolute -top-6 -right-5 flex items-center justify-center w-10 h-10 text-2xl font-extrabold bg-white text-red-700 rounded-full">
         {quantity}

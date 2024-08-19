@@ -25,7 +25,7 @@ const SingleProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();                                  //Extracting productID from the URL parameters
   const [product, setProduct] = useState<ProductDetails | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   // const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingcart();
@@ -71,7 +71,7 @@ const SingleProduct: React.FC = () => {
   };
 
   const handleAddToCart = () => {
-    if (product) {
+    if (product && isAuthenticated) {
       dispatch(addItem({
         ...product, quantity: 1,
       }));
@@ -218,7 +218,7 @@ const SingleProduct: React.FC = () => {
               />
             </div>
             <div className="flex gap-8">
-              <button onClick={addReview} className="bg-yellow-500 hover:-translate-y-2 duration-300 hover:bg-black text-white px-4 py-2 rounded">
+              <button onClick={addReview} className="bg-yellow-500 hover:-translate-y-2 duration-300 hover:bg-black text-white px-4 py-2 rounded" disabled={!isUserAuthorized}>
                 Submit Review
               </button>
               {isUserAuthorized && (
