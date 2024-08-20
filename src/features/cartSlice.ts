@@ -24,7 +24,6 @@ const cartSlice = createSlice({                                                 
   name: 'cart',
   initialState,
   reducers: {                                                                                                                 //Reducer functions to handle actions.
-     //Set the cart items to a new list, replacing the current items.
     setCartItems: (state, action: PayloadAction<CartItem[]>) => {
       state.items = action.payload;                                                                                           // Replace current items with the new list provided in the action payload.
       },

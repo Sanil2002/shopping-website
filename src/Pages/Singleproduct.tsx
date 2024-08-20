@@ -144,14 +144,15 @@ const SingleProduct: React.FC = () => {
   const isUserAuthorized = user?.email === 'sanilm4637@gmail.com';
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-md min-h-screen pt-32">
-      <div className="flex">
-        <img className="w-1/3 h-1/3 rounded-md " src={product.image} alt={product.title} />
-        <div className="ml-6 w-1/2">
-          <h1 className="text-5xl font-extrabold mb-4">{product.title}</h1>
-          <p className="text-3xl font-semibold text-gray-700 mb-2">${product.price}</p>
-          <p className="text-gray-600 mb-4">{product.description}</p>
-          <div className="flex items-center mb-4">
+    <div className="bg-white shadow-lg rounded-md sm:min-h-full p-6 sm:justify-center flex flex-col items-center sm:flex-row justify-center">
+    <div className="bg-white  border border-yellow-300 shadow-xl rounded-2xl p-4 w-full sm:max-w-[80%] sm:min-h-[600px]">
+      <div className="flex flex-col md:flex-row items-center sm:pl-6 py-3">
+        <img className="w-3/4 sm:w-1/4 h-3/4 sm:h-1/4 rounded-md mb-4 sm:mb-0" src={product.image} alt={product.title} />
+        <div className="mt-4 sm:mt-0 sm:ml-6 w-full sm:w-1/2 pl-4 sm:pl-16">
+          <h1 className="text-3xl sm:text-5xl font-extrabold mb-2 sm:mb-4">{product.title}</h1>
+          <p className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-2">${product.price}</p>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">{product.description}</p>
+          <div className="flex flex-col md:flex-row items-center mb-4"> 
             {product.rating ? (
               <>
                 <span className="text-yellow-400">
@@ -237,6 +238,7 @@ const SingleProduct: React.FC = () => {
           onUpdateProduct={handleUpdateProduct}
         />
       )}
+    </div>
     </div>
   );
 };

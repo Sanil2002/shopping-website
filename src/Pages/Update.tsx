@@ -70,7 +70,7 @@ const Update: React.FC = () => {
         <div className="text-center">
           <h1 className="p-4 justify-center bg-gradient-to-r from-black via-yellow-500 to-black bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl">UPDATE</h1>
         </div>
-        <div className="pl-11 gap-9 w-1/3 md:w-1/2 xl:w-1/3 top-0 right-0 left-0 flex ">
+        <div className="pl-11 gap-9 md:w-1/2 xl:w-1/3 top-0 right-0 left-0 flex">
           <select value={productCategory} onChange={handleFilteredChange} className="w-full bg-gray-100 border border-gray-300 rounded-lg py-2 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300">
             <option value="">Category</option>
             <option value="men's clothing">Men</option>
