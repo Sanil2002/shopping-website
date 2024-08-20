@@ -26,6 +26,8 @@ import getCartItemsFromLocalStorage from './Utilities/getCart';
 import saveCartItemsToLocalStorage from './Utilities/saveCart';
 import { setCartItems } from './features/cartSlice';
 import { Comments } from './Components/Comments';
+import Orders from './Pages/Orders';
+import OrderConfirmation from './Pages/OrderConfirmation';
 // import { useAuth0 } from '@auth0/auth0-react';
 // import { setupStore } from './app/store';
 
@@ -92,8 +94,8 @@ const dispatch = useDispatch();
           <Route path="/" element={<Home />} />
           {/* <Route path="/Store" element={<Store />} /> */}
           <Route path="/About" element={<About />} />
-          <Route path="/checkout" element={<CheckoutSuccess/>} />
           <Route path="/Dashboard" element={<Dashboard/>} />
+          <Route path="/OrderConfirmation" element={<OrderConfirmation/>} />
         </Routes>
         <Cart />
       </Container>
@@ -103,6 +105,8 @@ const dispatch = useDispatch();
       <Route path="/Store" element={<Store />} />
       <Route path="/Update" element={<Update/>} />
       <Route path="/Comments" element={<Comments />} />
+      <Route path="/Orders" element={<Orders />} />
+      <Route path="/checkout" element={<CheckoutSuccess/>} />
       </Routes>
       <Footer />
     {/* </Shoppingcartprovider> */}

@@ -27,8 +27,8 @@ const Profile = () => {
     navigate('/Update');
   };
 
-  const handleNavigateToStore = () => {
-    navigate('/Store');
+  const handleNavigateToOrders = () => {
+    navigate('/Orders');
   };
 
   const handleNavigateToDashboard = () => {
@@ -61,7 +61,7 @@ const Profile = () => {
          (<><ButtonComponent value="Dashboard" onClick={handleNavigateToDashboard} />
          <ButtonComponent value="Update" cl ="px-2" onClick={handleNavigateToUpdate} /></>)
         }
-        <ButtonComponent value="Back" onClick={handleNavigateToStore} />
+        <ButtonComponent value="My-Orders" onClick={handleNavigateToOrders} />
       </div>
       </div>
       </div>
