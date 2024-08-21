@@ -50,11 +50,14 @@ const cartSlice = createSlice({                                                 
     },
     closeCart: (state) => {
       state.isCartOpen = false;
-    }
+    },
+    clearCart: (state) => {
+      state.items = [];
+    },
   }
 });
 
-export const { addItem, removeItem, updateItemQuantity, openCart, closeCart,setCartItems } = cartSlice.actions;
+export const { addItem, removeItem, updateItemQuantity, openCart, closeCart,setCartItems, clearCart } = cartSlice.actions;
 export const selectCartItems = (state: RootState) => state.cart.items;                                                       //Selector to get the items from the cart state.
 export const selectCartItemQuantity = (state: RootState, id: number) =>                                                      // Selector to get the quantity of a specific item from the cart state.
   state.cart.items.find(item => item.id === id)?.quantity || 0;                                                              // Find the item with the given ID and return its quantity, defaulting to 0 if not found.

@@ -95,7 +95,7 @@ const dispatch = useDispatch();
           {/* <Route path="/Store" element={<Store />} /> */}
           <Route path="/About" element={<About />} />
           <Route path="/Dashboard" element={<Dashboard/>} />
-          <Route path="/OrderConfirmation" element={<OrderConfirmation/>} />
+          <Route path="/OrderConfirmation/:orderId" element={<OrderConfirmation />} />
         </Routes>
         <Cart />
       </Container>

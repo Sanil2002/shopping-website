@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // import { persistStore, persistReducer } from 'redux-persist'
 // import storage from 'redux-persist/lib/storage';
 import cartReducer from '../features/cartSlice';
+import OrderReducer from '../features/orderSlice'
 
 // const persistConfig={
 //   key:'root',
@@ -12,7 +13,8 @@ import cartReducer from '../features/cartSlice';
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer,             
+    cart: cartReducer,
+    order: OrderReducer,             
   },
 });
 

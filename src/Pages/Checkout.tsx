@@ -1,22 +1,83 @@
 import React from 'react';
-import { useSelector } from 'react-redux';                                        // Import hooks from react-redux to interact with the Redux store.
-import { RootState } from '../app/store';
+import { useSelector, useDispatch } from 'react-redux';                                        // Import hooks from react-redux to interact with the Redux store.
+import { RootState, AppDispatch } from '../app/store';
 import { useNavigate } from 'react-router-dom';
+import { addOrder, OrderItem } from '../features/orderSlice';
+import { clearCart } from '../features/cartSlice';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const CheckoutSuccess: React.FC = () => {
 
 
   const cartItems = useSelector((state: RootState) => state.cart.items); 
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const { user } = useAuth0();
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const handlePlaceOrder = async () => {
+    if (!user?.email) {
+      console.error('User email is not available.');
+      return;
+    }
 
-  const navigate = useNavigate();
+    const orderId = Date.now().toString();
+  
+    // Convert CartItem to OrderItem
+    const orderitems = cartItems.map(item => ({
+      ...item,
+      id: item.id.toString(), // Ensure ID is a string if necessary
+      orderid: orderId,
+      email: user.email, // User email
+    }));
+  
+    console.log("orderItems", orderitems);
+  
+    // Function to update local storage
+    const updateLocalStorage = () => {
+      return new Promise<void>((resolve, reject) => {
+        try {
+          // Retrieve existing orders from local storage
+          const existingOrdersJson = localStorage.getItem('orders');
+          const existingOrders: { orderId: string; orderitems: OrderItem[] }[] = existingOrdersJson ? JSON.parse(existingOrdersJson) : [];
+  
+          // Append new orders to existing orders
+          const updatedOrders = [...existingOrders, { orderId, orderitems }];
+  
+          // Save updated orders to local storage
+          localStorage.setItem('orders', JSON.stringify(updatedOrders));
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+    };
+  
+    try {
+      // Save order to Redux store
+      dispatch(addOrder({ orderId, orderitems }));
+  
+      // Update local storage (asynchronously)
+      await updateLocalStorage();
+  
+      // Clear the cart
+      dispatch(clearCart());
+  
+      // Navigate to order confirmation page
+      navigate(`/OrderConfirmation/${orderId}`, { state: { totalPrice } });
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
+  };
+  
+
+
+
+  
   const handleNavigateToAbout = () => {
     navigate('/About')
   }
-  const handleNavigateToOrderConfirmation = () => {
-    navigate("/OrderConfirmation");
-  }
+
 
 
 
@@ -50,7 +111,7 @@ const CheckoutSuccess: React.FC = () => {
             <div><label className="sr-only">Card name</label><input type="text" id="card-name" name="card-name" placeholder="Name on the card" className="mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-teal-500" /></div>
           </form>
           <p className="mt-10 text-center text-lg font-bold text-gray-500">By placing this order you agree to the <div onClick={handleNavigateToAbout} className="whitespace-nowrap text-teal-400 underline hover:text-teal-600">Terms and Conditions</div></p>
-          <button type="submit" onClick={handleNavigateToOrderConfirmation} className="mt-4 inline-flex w-full items-center justify-center rounded bg-teal-600 py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 sm:text-lg">Place Order</button>
+          <button type="submit" onClick={handlePlaceOrder} className="mt-4 inline-flex w-full items-center justify-center rounded bg-teal-600 py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 sm:text-lg">Place Order</button>
         </div>
       </div>
       <div className="relative col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">

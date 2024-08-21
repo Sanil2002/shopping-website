@@ -14,7 +14,9 @@ const Cart = () => {
   console.log("sdz",cartItems)
   const handleCheckout = () => {
     navigate('/checkout');
+    dispatch(closeCart())
   };
+
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   return (

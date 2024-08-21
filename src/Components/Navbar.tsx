@@ -48,7 +48,7 @@ export function Navbar() {
   const cartQuantity = useSelector((state: RootState) => state.cart.items.length);
   const { isAuthenticated, user } = useAuth0();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  console.log("useruseruseruser", user)
+  // console.log("useruseruseruser", user)
   const dispatch = useDispatch();
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
